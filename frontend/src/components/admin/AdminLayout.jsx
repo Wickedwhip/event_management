@@ -1,31 +1,20 @@
-
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import HeaderBar from "./HeaderBar";
-import EventsList from "./Events/EventsList";
-import TicketsList from "./Tickets/TicketsList";
-import EmployeesList from "./Employees/EmployeesList";
-import UsersOverview from "./Users/UsersOverview";
-import ReportsPage from "./Reports/ReportsPage";
 
-export default function AdminLayout({ onLogout }) {
+const AdminLayout = () => {
   return (
-    <div className="min-h-screen flex bg-gray-50">
-      <Sidebar onLogout={onLogout} />
-      <div className="flex-1">
-        <HeaderBar onLogout={onLogout} />
-        <main className="p-6">
-          <Routes>
-            <Route path="/" element={<EventsList />} />
-            <Route path="events" element={<EventsList />} />
-            <Route path="tickets" element={<TicketsList />} />
-            <Route path="employees" element={<EmployeesList />} />
-            <Route path="users" element={<UsersOverview />} />
-            <Route path="reports" element={<ReportsPage />} />
-          </Routes>
+    <div className="flex h-screen">
+      <Sidebar />
+      <div className="flex flex-col flex-1">
+        <HeaderBar />
+        <main className="p-6 bg-gray-100 flex-1 overflow-y-auto">
+          <Outlet />
         </main>
       </div>
     </div>
   );
-}
+};
+
+export default AdminLayout;
+

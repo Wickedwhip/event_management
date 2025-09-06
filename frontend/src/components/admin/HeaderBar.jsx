@@ -1,14 +1,11 @@
-
-import React from "react";
-
-export default function HeaderBar() {
+const HeaderBar = () => {
   return (
-    <header className="bg-white border-b p-4 flex items-center justify-between">
-      <div className="text-lg font-semibold text-gray-800">Dashboard</div>
-      <div className="flex items-center gap-4">
-        <div className="text-sm text-gray-600">Admin Joe</div>
-        <div className="w-9 h-9 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold">J</div>
-      </div>
+    <header className="h-16 bg-white shadow flex items-center justify-between px-6">
+      <h1 className="text-lg font-semibold">Dashboard</h1>
+      <button className="px-4 py-2 bg-red-500 text-white rounded">Logout</button>
     </header>
   );
-}
+};
+
+export default HeaderBar;
+
