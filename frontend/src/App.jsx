@@ -9,7 +9,7 @@ import EmployeesList from "./components/admin/Employees/EmployeesList";
 import TicketsList from "./components/admin/Tickets/TicketsList";
 import UsersOverview from "./components/admin/Users/UsersOverview";
 import ReportsPage from "./components/admin/Reports/ReportsPage";
-import TasksList from "./components/admin/Tasks/TasksList"; // <-- new import
+import TasksList from "./components/admin/Tasks/TaskList";
 import SettingsPage from "./components/admin/Settings/SettingsPage";
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Login page */}
+        {/* Login */}
         <Route
           path="/"
           element={
@@ -30,28 +30,20 @@ function App() {
           }
         />
 
-        {/* Admin layout and routes */}
+        {/* Admin Layout and nested pages */}
         {isLoggedIn && (
-          <Route
-            path="/*"
-            element={
-              <AdminLayout onLogout={() => setIsLoggedIn(false)}>
-                <Routes>
-                  <Route path="dashboard" element={<Dashboard />} />
-                  <Route path="events" element={<EventsList />} />
-                  <Route path="employees" element={<EmployeesList />} />
-                  <Route path="tickets" element={<TicketsList />} />
-                  <Route path="users" element={<UsersOverview />} />
-                  <Route path="reports" element={<ReportsPage />} />
-                  <Route path="tasks" element={<TasksList />} />
-                  <Route path="settings" element={<SettingsPage />} />
-
-                  {/* Redirect unknown paths */}
-                  <Route path="*" element={<Navigate to="dashboard" replace />} />
-                </Routes>
-              </AdminLayout>
-            }
-          />
+          <Route path="/" element={<AdminLayout onLogout={() => setIsLoggedIn(false)} />}>
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="events" element={<EventsList />} />
+            <Route path="employees" element={<EmployeesList />} />
+            <Route path="tickets" element={<TicketsList />} />
+            <Route path="users" element={<UsersOverview />} />
+            <Route path="reports" element={<ReportsPage />} />
+            <Route path="tasks" element={<TasksList />} />
+            <Route path="settings" element={<SettingsPage />} />
+            <Route path="*" element={<Navigate to="dashboard" replace />} />
+          </Route>
         )}
       </Routes>
     </Router>

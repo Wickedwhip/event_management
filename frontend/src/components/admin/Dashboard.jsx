@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
-
-// Dummy URLs (replace with real API endpoints later)
-const STATS_API = "/api/stats";
-const ACTIVITIES_API = "/api/activities";
-const NEXT_EVENT_API = "/api/next-event";
+import "./Dashboard.css"; // we'll create this CSS file
 
 const Dashboard = () => {
   const [stats, setStats] = useState([]);
@@ -11,88 +7,58 @@ const Dashboard = () => {
   const [nextEvent, setNextEvent] = useState({});
 
   useEffect(() => {
-    // Fetch stats
-    fetch(STATS_API)
-      .then((res) => res.json())
-      .then((data) => setStats(data))
-      .catch(() => {
-        // Fallback dummy data
-        setStats([
-          { label: "Total Users", value: 1245, color: "cyan" },
-          { label: "Total Employees", value: 58, color: "pink" },
-          { label: "Upcoming Events", value: 12, color: "green" },
-          { label: "Active Tasks", value: 34, color: "purple" },
-        ]);
-      });
+    // Dummy stats
+    setStats([
+      { label: "Total Users", value: 1245, color: "#00f5ff" },
+      { label: "Total Employees", value: 58, color: "#ff00ff" },
+      { label: "Upcoming Events", value: 12, color: "#00ff80" },
+      { label: "Active Tasks", value: 34, color: "#8000ff" },
+    ]);
 
-    // Fetch activities
-    fetch(ACTIVITIES_API)
-      .then((res) => res.json())
-      .then((data) => setActivities(data))
-      .catch(() => {
-        setActivities([
-          { activity: "John created a new event", time: "2h ago" },
-          { activity: "Alice updated employee profile", time: "5h ago" },
-          { activity: "Event 'Tech Summit' published", time: "1d ago" },
-          { activity: "Ticket 'VIP Pass' assigned", time: "2d ago" },
-        ]);
-      });
+    setActivities([
+      { activity: "John created a new event", time: "2h ago" },
+      { activity: "Alice updated employee profile", time: "5h ago" },
+      { activity: "Event 'Tech Summit' published", time: "1d ago" },
+      { activity: "Ticket 'VIP Pass' assigned", time: "2d ago" },
+    ]);
 
-    // Fetch next event
-    fetch(NEXT_EVENT_API)
-      .then((res) => res.json())
-      .then((data) => setNextEvent(data))
-      .catch(() => {
-        setNextEvent({ title: "Tech Summit 2025", countdown: "12d 5h 30m" });
-      });
+    setNextEvent({ title: "Tech Summit 2025", countdown: "12d 5h 30m" });
   }, []);
 
   return (
-    <div className="space-y-8">
+    <div className="dashboard-container">
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="stats-grid">
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className={`p-6 rounded-xl bg-gray-800 bg-opacity-30 backdrop-blur-md border border-gray-700 hover:shadow-lg transition duration-300`}
-            style={{
-              borderColor: `rgba(${stat.color === "cyan" ? "0,245,255" :
-                                stat.color === "pink" ? "255,0,255" :
-                                stat.color === "green" ? "0,255,128" : "128,0,255"},0.5)`,
-              boxShadow: `0 0 12px rgba(${stat.color === "cyan" ? "0,245,255" :
-                                       stat.color === "pink" ? "255,0,255" :
-                                       stat.color === "green" ? "0,255,128" : "128,0,255"},0.3)`,
-            }}
+            className="stat-card"
+            style={{ borderColor: stat.color, boxShadow: `0 0 10px ${stat.color}` }}
           >
-            <h3 className={`text-sm font-medium text-${stat.color}-400`}>
-              {stat.label}
-            </h3>
-            <p className="text-2xl font-bold text-white mt-2">{stat.value}</p>
+            <h3 style={{ color: stat.color }}>{stat.label}</h3>
+            <p>{stat.value}</p>
           </div>
         ))}
       </div>
 
       {/* Recent Activity */}
-      <div className="bg-gray-800 bg-opacity-30 backdrop-blur-md border border-gray-700 rounded-xl p-6">
-        <h2 className="text-lg font-bold text-white mb-4">Recent Activity</h2>
-        <ul className="space-y-2">
+      <div className="activity-card">
+        <h2>Recent Activity</h2>
+        <ul>
           {activities.map((act, idx) => (
-            <li
-              key={idx}
-              className="flex justify-between px-4 py-2 rounded hover:bg-gray-700 transition"
-            >
+            <li key={idx}>
               <span>{act.activity}</span>
-              <span className="text-gray-400 text-sm">{act.time}</span>
+              <span className="time">{act.time}</span>
             </li>
           ))}
         </ul>
       </div>
 
-      {/* Event Countdown Widget */}
-      <div className="bg-gray-800 bg-opacity-30 backdrop-blur-md border border-gray-700 rounded-xl p-6 flex flex-col items-center">
-        <h2 className="text-lg font-bold text-white mb-2">Next Event</h2>
-        <p className="text-cyan-400 font-semibold">{nextEvent.title}</p>
-        <p className="text-white mt-2">Countdown: {nextEvent.countdown}</p>
+      {/* Next Event */}
+      <div className="next-event-card">
+        <h2>Next Event</h2>
+        <p className="event-title">{nextEvent.title}</p>
+        <p className="countdown">{nextEvent.countdown}</p>
       </div>
     </div>
   );
