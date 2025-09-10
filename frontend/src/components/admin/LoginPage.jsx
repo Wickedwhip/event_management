@@ -1,34 +1,46 @@
-const LoginPage = () => {
+import React from "react";
+
+const LoginPage = ({ onLogin }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // fake login: just check fields are not empty
+    const username = e.target[0].value.trim();
+    const password = e.target[1].value.trim();
+    if (username && password) {
+      onLogin();
+    } else {
+      alert("Please enter username and password");
+    }
+  };
+
   return (
-    <div className="flex h-screen items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800">
-  <div className="w-full max-w-sm p-6 bg-gray-950 text-white shadow-xl rounded-xl border border-gray-800">
-        <h2 className="text-3xl font-extrabold mb-6 text-center text-cyan-400 tracking-wide">
-            Admin Login
-        </h2>
-        <form>
-            <input
-            type="email"
-            placeholder="Email"
-            className="w-full px-4 py-2 bg-gray-900 text-white border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
-            />
-            <input
-            type="password"
-            placeholder="Password"
-            className="w-full px-4 py-2 bg-gray-900 text-white border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
-            />
+    <div className="login-wrapper">
+      <form className="login-form" onSubmit={handleSubmit}>
+        <h2>Login</h2>
 
-            <button
-             type="submit"
-             className="w-full py-2 bg-cyan-500 text-black font-semibold rounded hover:bg-cyan-400 transition-all duration-300 shadow-md hover:shadow-cyan-500/50"
-            >
-            Login
-            </button>
+        <input type="text" placeholder="Username" />
+        <input type="password" placeholder="Password" />
 
-        </form>
-      </div>
+        <button type="submit">Sign In</button>
+
+        {/* Extra links */}
+        <div className="flex flex-col items-center mt-4 space-y-2">
+          <a
+            href="/forgot-password"
+            className="text-sm text-gray-300 hover:text-white transition"
+          >
+            Forgot Password?
+          </a>
+          <a
+            href="/register"
+            className="text-sm font-semibold text-cyan-400 hover:glow hover:text-cyan-300 transition"
+          >
+            Register
+          </a>
+        </div>
+      </form>
     </div>
   );
 };
 
 export default LoginPage;
-
