@@ -63,6 +63,15 @@ const Sidebar = () => {
           background: rgba(255,255,255,0.03);
           color: #fff;
         }
+          .sidebar-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, #00eaff, #ff00cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
       `}</style>
     </div>
   );
