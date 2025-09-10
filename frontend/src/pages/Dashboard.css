@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@500;700&display=swap');
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background: #111;
+  color: #fff;
+}
+
+/* Container */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+/* Responsive: Stack grid on small screens */
+@media (max-width: 600px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+.panel {
+  background: rgba(255, 255, 255, 0.05);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1rem;
+  transition: all 0.3s ease;
+}
+.panel:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 245, 255, 0.6);
+}
+
+/* Stat Card */
+.stat-card h3 {
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+}
+.stat-card p {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+/* Recent Activity */
+.activity-panel h2 {
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 0.5rem;
+}
+.activity-panel ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.activity-panel li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.3s;
+}
+.activity-panel li:hover {
+  background: rgba(0, 245, 255, 0.1);
+}
+.time {
+  color: #aaa;
+  font-size: 0.8rem;
+}
+
+/* Next Event */
+.next-event-panel {
+  text-align: center;
+}
+.event-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  color: #00f5a0;
+}
+.countdown {
+  font-size: 1.2rem;
+  margin-top: 0.3rem;
+}
+
+/* Pulse Animation */
+.pulse {
+  animation: pulseAnimation 2s infinite;
+}
+@keyframes pulseAnimation {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+/* Fade In */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Optional: auto-add 'visible' on scroll using JS */

@@ -1,17 +1,23 @@
-import Sidebar from "../components/Sidebar";
-import HeaderBar from "../components/HeaderBar";
+import { Outlet } from "react-router-dom";
+import { useState } from "react";
+import Sidebar from "./Sidebar";
+import HeaderBar from "./HeaderBar";
 
-const AdminLayout = ({ children, onLogout }) => {
+const AdminLayout = ({ onLogout }) => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
-    <div className="flex h-screen">
+    <div style={{display:'flex', height:'100vh'}}>
       {/* Sidebar */}
-      <Sidebar />
+      <div style={{width: '250px', background:'#222', color:'#fff'}}>
+        <Sidebar />
+      </div>
 
-      {/* Main Content */}
-      <div className="flex flex-col flex-1">
-        <HeaderBar onLogout={onLogout} />
-        <main className="flex-1 overflow-y-auto p-6 bg-[#1A1A1A] text-white">
-          {children}
+      {/* Main content */}
+      <div style={{flex:1, background:'#111', color:'#fff', padding:'20px'}}>
+        <HeaderBar toggleSidebar={() => setSidebarOpen(!sidebarOpen)} onLogout={onLogout} />
+        <main>
+          <Outlet />
         </main>
       </div>
     </div>

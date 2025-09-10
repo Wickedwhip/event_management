@@ -1,37 +1,69 @@
-import { Link } from "react-router-dom";
-import { Home, Calendar, Users, Ticket, BarChart2, User } from "lucide-react";
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { Home, Calendar, Users, Ticket, BarChart2 } from "lucide-react";
 
 const Sidebar = () => {
-  return (
-    <div className="sidebar w-64 flex-shrink-0 flex flex-col">
-      <h2 className="text-xl font-bold mb-6">Admin Panel</h2>
+  const linkClass = ({ isActive }) =>
+    `sidebar-link ${isActive ? "active" : ""}`;
 
-      <nav className="flex flex-col space-y-2">
-        <Link to="/dashboard" className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-700 transition">
-          <Home size={20} /> <span>Dashboard</span>
-        </Link>
-        <Link to="/events" className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-700 transition">
-          <Calendar size={20} /> <span>Events</span>
-        </Link>
-        <Link to="/employees" className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-700 transition">
-          <Users size={20} /> <span>Employees</span>
-        </Link>
-        <Link to="/tickets" className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-700 transition">
-          <Ticket size={20} /> <span>Tickets</span>
-        </Link>
-        <Link to="/users" className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-700 transition">
-          <User size={20} /> <span>Users</span>
-        </Link>
-        <Link to="/reports" className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-700 transition">
-          <BarChart2 size={20} /> <span>Reports</span>
-        </Link>
-        <Link to="/tasks" className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-700 transition">
-          <Calendar size={20} /> <span>Tasks & Reminders</span>
-        </Link>
-        <Link to="/settings" className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-700 transition">
-          <Home size={20} /> <span>Settings</span>
-        </Link>
+  return (
+    <div style={{ padding: 20, background: "#111214", color: "#fff", height: "100vh" }}>
+      <h2 style={{ marginBottom: 20, fontSize: 20 }}>Admin Panel</h2>
+
+      <nav style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <NavLink to="/dashboard" className={linkClass}>
+          <Home size={16} /> <span style={{ marginLeft: 8 }}>Dashboard</span>
+        </NavLink>
+
+        <NavLink to="/events" className={linkClass}>
+          <Calendar size={16} /> <span style={{ marginLeft: 8 }}>Events</span>
+        </NavLink>
+
+        <NavLink to="/employees" className={linkClass}>
+          <Users size={16} /> <span style={{ marginLeft: 8 }}>Employees</span>
+        </NavLink>
+
+        <NavLink to="/tasks" className={linkClass}>
+          <Calendar size={16} /> <span style={{ marginLeft: 8 }}>Tasks</span>
+        </NavLink>
+
+        <NavLink to="/tickets" className={linkClass}>
+          <Ticket size={16} /> <span style={{ marginLeft: 8 }}>Tickets</span>
+        </NavLink>
+
+        <NavLink to="/users" className={linkClass}>
+          <Users size={16} /> <span style={{ marginLeft: 8 }}>Users</span>
+        </NavLink>
+
+        <NavLink to="/reports" className={linkClass}>
+          <BarChart2 size={16} /> <span style={{ marginLeft: 8 }}>Reports</span>
+        </NavLink>
+
+        <NavLink to="/settings" className={linkClass}>
+          <span style={{ marginLeft: 8 }}>Settings</span>
+        </NavLink>
       </nav>
+
+      <style>{`
+        .sidebar-link {
+          display:flex;
+          align-items:center;
+          gap:8px;
+          padding:10px;
+          border-radius:8px;
+          color: #cbd5e1;
+          text-decoration: none;
+        }
+        .sidebar-link.active {
+          background: rgba(0,245,255,0.08);
+          color: #00f5ff;
+          box-shadow: 0 0 8px rgba(0,245,255,0.08);
+        }
+        .sidebar-link:hover {
+          background: rgba(255,255,255,0.03);
+          color: #fff;
+        }
+      `}</style>
     </div>
   );
 };
