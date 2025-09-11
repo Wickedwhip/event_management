@@ -1,38 +1,62 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import Sidebar from "./Sidebar";
-import HeaderBar from "./HeaderBar";
+// src/components/admin/AdminLayout.jsx
+import React from "react";
+import { Routes, Route, Outlet } from "react-router-dom";
+import Sidebar from "./Sidebar.jsx";
+import HeaderBar from "./HeaderBar.jsx";
+import Dashboard from "./Dashboard.jsx";
 
-import Dashboard from "./Dashboard";
-import EmployeesList from "./Employees/EmployeesList";
-import EventsList from "./Events/EventsList";
-import TasksList from "./Tasks/TaskList";
-import TicketsList from "./Tickets/TicketsList";
-import UsersOverview from "./Users/UsersOverview";
-import ReportsPage from "./Reports/ReportsPage";
-import SettingsPage from "./Settings/SettingsPage";
+// admin sections (these files exist in your tree)
+import EventsList from "./Events/EventsList.jsx";
+import EventForm from "./Events/EventForm.jsx";
+import EmployeesList from "./Employees/EmployeesList.jsx";
+import EmployeeForm from "./Employees/EmployeeForm.jsx";
+import TaskList from "./Tasks/TaskList.jsx";
+import TaskForm from "./Tasks/TaskForm.jsx";
+import TicketsList from "./Tickets/TicketsList.jsx";
+import TicketForm from "./Tickets/TicketForm.jsx";
+import UsersOverview from "./Users/UsersOverview.jsx";
+import ReportsPage from "./Reports/ReportsPage.jsx";
+import SettingsPage from "./Settings/SettingsPage.jsx";
 
-import "./AdminLayout.css"; // ✅ correct
+import "../../styles/main.css";
 
 const AdminLayout = ({ onLogout }) => {
   return (
-    <div className="admin-layout">
+    <div className="layout admin-layout">
       <Sidebar />
-      <div className="main-section">
+      <div className="main-column">
         <HeaderBar onLogout={onLogout} />
-        <div className="content-wrapper">
+        <main className="content-area">
+          {/* Render nested routes */}
           <Routes>
-            <Route path="/" element={<Navigate to="dashboard" replace />} />
+            <Route path="/" element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="employees" element={<EmployeesList />} />
+
+            {/* Events */}
             <Route path="events" element={<EventsList />} />
-            <Route path="tasks" element={<TasksList />} />
+            <Route path="events/form" element={<EventForm />} />
+
+            {/* Employees */}
+            <Route path="employees" element={<EmployeesList />} />
+            <Route path="employees/form" element={<EmployeeForm />} />
+
+            {/* Tasks */}
+            <Route path="tasks" element={<TaskList />} />
+            <Route path="tasks/form" element={<TaskForm />} />
+
+            {/* Tickets */}
             <Route path="tickets" element={<TicketsList />} />
+            <Route path="tickets/form" element={<TicketForm />} />
+
+            {/* Other admin pages */}
             <Route path="users" element={<UsersOverview />} />
             <Route path="reports" element={<ReportsPage />} />
             <Route path="settings" element={<SettingsPage />} />
-            <Route path="*" element={<Navigate to="dashboard" replace />} />
           </Routes>
-        </div>
+
+          {/* Keep Outlet in case other nested renders needed */}
+          <Outlet />
+        </main>
       </div>
     </div>
   );

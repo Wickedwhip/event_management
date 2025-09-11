@@ -1,27 +1,26 @@
-import { useNavigate } from 'react-router-dom';
+// src/components/employee/Tasks/TaskForm.jsx
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const TaskForm = () => {
   const navigate = useNavigate();
+  const [title, setTitle] = useState("");
 
-  const handleSubmit = (e) => {
+  const save = (e) => {
     e.preventDefault();
-    alert('Task added successfully!');
-    navigate(-1); // go back to list
+    alert(`Saved task: ${title}`);
+    navigate("/employee/tasks");
   };
 
   return (
     <div className="glass-card">
       <h2>Add Task</h2>
-      <form onSubmit={handleSubmit}>
-        <input placeholder="Task Title" required style={{ width:'100%', padding:10, marginBottom:10, borderRadius:6 }}/>
-        <textarea placeholder="Task Description" style={{ width:'100%', padding:10, marginBottom:10, borderRadius:6 }} />
-        <select style={{ width:'100%', padding:10, marginBottom:10, borderRadius:6 }}>
-          <option value="">Select Status</option>
-          <option value="Pending">Pending</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Completed">Completed</option>
-        </select>
-        <button type="submit">Save Task</button>
+      <form onSubmit={save} style={{ display: "grid", gap: 10 }}>
+        <input value={title} onChange={e => setTitle(e.target.value)} placeholder="Task title" required />
+        <div style={{ display: "flex", gap: 8 }}>
+          <button className="neon-btn" type="submit">Save</button>
+          <button className="neon-btn" type="button" onClick={() => navigate(-1)}>Cancel</button>
+        </div>
       </form>
     </div>
   );

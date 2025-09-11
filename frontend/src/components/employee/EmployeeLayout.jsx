@@ -1,29 +1,42 @@
-import { Outlet } from "react-router-dom";
-import { useState } from "react";
-import EmployeeHeaderBar from "../EmployeeHeaderBar";
-import EmployeeSidebar from "./EmployeeSidebar";
+// src/components/employee/EmployeeLayout.jsx
+import React, { useState } from "react";
+import { Routes, Route, Outlet } from "react-router-dom";
+import EmployeeSidebar from "./EmployeeSidebar.jsx";
+import EmployeeHeaderBar from "../EmployeeHeaderBar.jsx";
+import EmployeeDashboard from "./EmployeeDashboard.jsx";
+
+// employee pairs
+import EventList from "./Events/EventList.jsx";
+import EventForm from "./Events/EventForm.jsx";
+import TaskList from "./Tasks/TaskList.jsx";
+import TaskForm from "./Tasks/TaskForm.jsx";
+import ProfilePage from "./Profile/ProfilePage.jsx";
+
 import "./employee.css";
 
 const EmployeeLayout = ({ onLogout }) => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
   return (
     <div className="employee-layout">
-      {/* Sidebar */}
-      <div className={`sidebar-wrapper ${sidebarOpen ? "open" : ""}`}>
-        <EmployeeSidebar />
-      </div>
+      <EmployeeSidebar />
+      <div className="employee-main">
+        <EmployeeHeaderBar onLogout={onLogout} />
+        <main className="employee-content">
+          <Routes>
+            <Route path="/" element={<EmployeeDashboard />} />
+            <Route path="dashboard" element={<EmployeeDashboard />} />
 
-      {/* Overlay */}
-      {sidebarOpen && (
-        <div className="overlay" onClick={() => setSidebarOpen(false)} />
-      )}
+            {/* Events */}
+            <Route path="events" element={<EventList />} />
+            <Route path="events/form" element={<EventForm />} />
 
-      {/* Main Content */}
-      <div className={`employee-main ${sidebarOpen ? "shifted" : ""}`}>
-        <EmployeeHeaderBar toggleSidebar={() => setSidebarOpen(!sidebarOpen)} onLogout={onLogout} />
-        <main>
-          <Outlet /> {/* Nested pages like Dashboard, Tasks, Events */}
+            {/* Tasks */}
+            <Route path="tasks" element={<TaskList />} />
+            <Route path="tasks/form" element={<TaskForm />} />
+
+            <Route path="profile" element={<ProfilePage />} />
+          </Routes>
+
+          <Outlet />
         </main>
       </div>
     </div>

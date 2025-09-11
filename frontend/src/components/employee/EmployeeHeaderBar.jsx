@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const HeaderBar = ({ onLogout }) => {
+const EmployeeHeaderBar = ({ onLogout, toggleSidebar }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -11,10 +11,11 @@ const HeaderBar = ({ onLogout }) => {
 
   return (
     <header className="header-bar">
-      <div className="header-title">👋 Welcome to <strong>TriVerse Hub</strong></div>
+      <button onClick={toggleSidebar} className="sidebar-toggle">☰</button>
+      <div className="header-title">👋 Welcome, Employee</div>
       <button className="logout-btn" onClick={handleLogout}>🔒 Logout</button>
     </header>
   );
 };
 
-export default HeaderBar;
+export default EmployeeHeaderBar;

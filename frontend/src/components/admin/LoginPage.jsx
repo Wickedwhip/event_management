@@ -1,55 +1,38 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../styles/LoginPage.css";
-
 
 const LoginPage = ({ onLogin }) => {
   const [role, setRole] = useState("admin");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const username = e.target.username.value.trim();
     const password = e.target.password.value.trim();
-
     if (!username || !password) {
-      alert("Enter credentials");
+      alert("Enter username & password");
       return;
     }
 
-    onLogin(role); // route based on role
+    onLogin(role);        // update App state
+    navigate(`/${role}/dashboard`, { replace: true }); // go there now
   };
 
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit}>
-        <h1 className="login-title">Admin / Employee Login</h1>
+        <h1 className="login-title">TriVerse — Sign In</h1>
 
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          className="login-input"
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          className="login-input"
-          required
-        />
+        <input name="username" className="login-input" placeholder="Username" />
+        <input name="password" type="password" className="login-input" placeholder="Password" />
 
-        <select
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-          className="login-select"
-        >
+        <select value={role} onChange={(e) => setRole(e.target.value)} className="login-select">
           <option value="admin">Admin</option>
           <option value="employee">Employee</option>
         </select>
 
-        <button type="submit" className="login-button">
-          Login
-        </button>
+        <button type="submit" className="login-button">Login</button>
       </form>
     </div>
   );
