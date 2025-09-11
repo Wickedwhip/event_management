@@ -1,0 +1,125 @@
+:root {
+  --bg-dark: #0a0a0f;
+  --glass-bg: rgba(0,0,0,0.6);
+  --accent-cyan: #00f5ff;
+  --accent-magenta: #ff00cc;
+  --accent-lime: #00ff00;
+  --accent-yellow: #ffff00;
+  --text-primary: #ffffff;
+  --transition-fast: 0.2s ease-in-out;
+  --blur: 10px;
+}
+
+/* Body */
+body {
+  margin: 0;
+  font-family: 'Rajdhani', sans-serif;
+  background: radial-gradient(circle at top left, #0a0a0f, #1a1a1a);
+  overflow-x: hidden;
+  color: var(--text-primary);
+}
+
+/* Employee Layout */
+.employee-layout {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  min-height: 100vh;
+}
+
+.employee-main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: 0;
+}
+
+.employee-main main {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+  width: 100%;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Grids */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Glass Cards */
+.glass-card {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: blur(var(--blur));
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 20px;
+  color: var(--text-primary);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+.glass-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 20px var(--accent-cyan);
+}
+.glass-card h3, .glass-card h4 { margin: 0 0 10px 0; }
+.glass-card p { font-size: 1.2rem; margin: 0; }
+
+/* Colored top borders */
+.glass-card[style*="cyan"] { border-top-color: var(--accent-cyan); }
+.glass-card[style*="magenta"] { border-top-color: var(--accent-magenta); }
+.glass-card[style*="lime"] { border-top-color: var(--accent-lime); }
+.glass-card[style*="yellow"] { border-top-color: var(--accent-yellow); }
+
+/* Neon Buttons */
+.neon-btn {
+  background: transparent;
+  border: 1px solid var(--accent-cyan);
+  color: var(--accent-cyan);
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 5px;
+  transition: all var(--transition-fast);
+}
+.neon-btn:hover {
+  background: var(--accent-cyan);
+  color: var(--bg-dark);
+  box-shadow: 0 0 10px var(--accent-cyan), 0 0 20px var(--accent-cyan);
+  transform: scale(1.05);
+}
+
+/* Quick Actions Layout */
+.quick-actions .btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
