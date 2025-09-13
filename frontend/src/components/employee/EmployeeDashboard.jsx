@@ -28,7 +28,11 @@ const EmployeeDashboard = () => {
       {/* Stats */}
       <div className="stats-grid fade-in">
         {stats.map((s, i) => (
-          <div key={i} className="glass-card" style={{ borderTop: `4px solid ${s.color}` }}>
+          <div
+            key={i}
+            className="glass-card"
+            style={{ borderTop: `4px solid ${s.color}` }}
+          >
             <h3>{s.title}</h3>
             <p className="pulse">{s.value}</p>
           </div>
@@ -53,22 +57,6 @@ const EmployeeDashboard = () => {
               </div>
             </div>
           ))}
-        </div>
-      </div>
-
-      {/* Quick Actions */}
-      <div className="quick-actions fade-in">
-        <h2>⚡ Quick Actions</h2>
-        <div className="btn-group">
-          <Link to="/employee/tasks">
-            <button className="neon-btn">View Tasks</button>
-          </Link>
-          <Link to="/employee/tasks/new">
-            <button className="neon-btn">Add Task</button>
-          </Link>
-          <Link to="/employee/profile">
-            <button className="neon-btn">Profile</button>
-          </Link>
         </div>
       </div>
     </div>

@@ -1,38 +1,38 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "../../styles/LoginPage.css";
 
 const LoginPage = ({ onLogin }) => {
-  const [role, setRole] = useState("admin");
-  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const username = e.target.username.value.trim();
-    const password = e.target.password.value.trim();
-    if (!username || !password) {
-      alert("Enter username & password");
-      return;
-    }
+    setError("");
 
-    onLogin(role);        // update App state
-    navigate(`/${role}/dashboard`, { replace: true }); // go there now
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
+      const data = await res.json();
+
+      if (!res.ok) return setError(data.msg || "Login failed");
+
+      onLogin(data.role);
+    } catch (err) {
+      setError("Server error");
+    }
   };
 
   return (
-    <div className="login-container">
-      <form className="login-form" onSubmit={handleSubmit}>
-        <h1 className="login-title">TriVerse — Sign In</h1>
-
-        <input name="username" className="login-input" placeholder="Username" />
-        <input name="password" type="password" className="login-input" placeholder="Password" />
-
-        <select value={role} onChange={(e) => setRole(e.target.value)} className="login-select">
-          <option value="admin">Admin</option>
-          <option value="employee">Employee</option>
-        </select>
-
-        <button type="submit" className="login-button">Login</button>
+    <div className="glass-card">
+      <h2>Admin Login</h2>
+      <form onSubmit={handleSubmit} style={{ display: "grid", gap: 10 }}>
+        <input value={username} onChange={e => setUsername(e.target.value)} placeholder="Username" required />
+        <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" required />
+        {error && <div style={{ color: "red" }}>{error}</div>}
+        <button className="neon-btn" type="submit">Login</button>
       </form>
     </div>
   );

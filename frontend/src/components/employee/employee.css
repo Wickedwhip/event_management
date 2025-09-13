@@ -71,3 +71,46 @@
 .employee-sidebar { width:260px; }
 .employee-main { flex:1; }
 .employee-content { padding:20px; }
+
+.glass-card {
+  background: rgba(15, 17, 21, 0.85);
+  border: 1px solid rgba(0, 245, 255, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+}
+
+.neon-input {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid #00f5ff;
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: #fff;
+  outline: none;
+  box-shadow: 0 0 8px #00f5ff;
+  transition: 0.2s;
+}
+
+.neon-input:focus {
+  border-color: #ff00cc;
+  box-shadow: 0 0 12px #ff00cc;
+}
+
+.neon-btn {
+  background: none;
+  border: 1px solid #00f5ff;
+  border-radius: 6px;
+  padding: 8px 16px;
+  color: #00f5ff;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: 0.2s;
+  box-shadow: 0 0 6px #00f5ff;
+}
+
+.neon-btn:hover {
+  border-color: #ff00cc;
+  color: #ff00cc;
+  box-shadow: 0 0 10px #ff00cc;
+}
